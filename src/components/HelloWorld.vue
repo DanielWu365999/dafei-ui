@@ -30,6 +30,7 @@
 
     <div class="toast">
       <df-button type="primary" @click="showToast">点击</df-button>
+      <df-button type="primary" @click="showConfirm">确认</df-button>
     </div>
 
     <div class="scroll">
@@ -39,6 +40,9 @@
     </div>
     <div class="recordTime" v-if="false">
       <df-recordTime-picker :data="data"></df-recordTime-picker>
+    </div>
+    <div class="pagination">
+      <df-pagination :total="50" :pageSize="8" @current-change="handleCurrentChange"></df-pagination>
     </div>
   </div>
 </template>
@@ -107,6 +111,29 @@ export default {
           }
         }
       });
+    },
+    showConfirm(){
+      this.$confirm({
+        message:'一个来自朋友的邀请',
+        content:'今天晚上去大学城吗?',
+        autoClose:false,
+        type:'success',
+        closeButton:{
+          text:'关闭',
+          callback(){
+            alert('关闭')
+          }
+        },
+        cancelButton:{
+          text:'取消',
+          callBack(){
+            console.log('取消')
+          }
+        }
+      });
+    },
+    handleCurrentChange(val){
+      console.log(`当前第${val}页`);
     }
   }
 }
